@@ -105,9 +105,7 @@ modwarden/
 
 ## Sponsored
 
-[![BisectHosting](https://www.bisecthosting.com/partners/custom-banners/b3beab18-8f08-4e68-bb2e-ec9e47dfb908.webp)](https://www.bisecthosting.com/clients/aff.php?aff=7308)
-
-Need a Minecraft server? [BisectHosting](https://www.bisecthosting.com/clients/aff.php?aff=7308) offers reliable hosting with instant setup and 24/7 support.
+[![BisectHosting](assets/bisect_banner.png)](https://www.bisecthosting.com/clients/aff.php?aff=7308)
 
 ---
 
