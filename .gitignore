@@ -1,0 +1,20 @@
+# Build output
+dist/
+build/
+*.spec
+__pycache__/
+*.pyc
+*.pyo
+
+# PyInstaller
+*.manifest
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

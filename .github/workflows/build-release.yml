@@ -1,0 +1,70 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build .exe on Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build executable
+        run: |
+          cd src
+          pyinstaller `
+            --onefile `
+            --windowed `
+            --name "ModWarden" `
+            --add-data ".;." `
+            --add-data "..\assets;assets" `
+            main.py
+        shell: pwsh
+
+      - name: Move artifact
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Copy-Item src\dist\ModWarden.exe dist\ModWarden.exe
+        shell: pwsh
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "ModWarden ${{ github.ref_name }}"
+          body: |
+            ## ModWarden ${{ github.ref_name }}
+
+            ### What's new
+            <!-- Fill in the changelog here or use release notes -->
+
+            ### Download
+            Download **ModWarden.exe** below — no installation required, just run it.
+
+            ### System requirements
+            - Windows 10 / 11 (64-bit)
+
+            ---
+            Built automatically from tag `${{ github.ref_name }}`.
+          files: dist/ModWarden.exe
+          draft: false
+          prerelease: false
